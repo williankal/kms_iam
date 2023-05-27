@@ -1,0 +1,23 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "AllowAllKMS",
+        "Action": "kms:*",
+        "Effect": "Allow",
+        "Resource": " arn:aws:kms:*:111122223333:key/*"
+      },
+      {
+        "Sid": "DenyKMSKeyUsage",
+        "Action": [
+          "kms:Decrypt",
+          "kms:Encrypt",
+          "kms:GenerateDataKey",
+          "kms:ReEncryptFrom",
+          "kms:ReEncryptTo"
+        ],
+        "Effect": "Deny",
+        "Resource": " arn:aws:kms:*:111122223333:key/*"
+      }
+    ]
+  }
