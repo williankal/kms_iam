@@ -398,7 +398,7 @@ data "aws_iam_policy_document" "hello" {
 }
 ```
 
-Lembre-se: Esse código poderia ser tanto realizado por voce para criação do código ou o seu kms-admin poderia executá-lo, após gerado a chave iremos utilizá-la na policy do bucket, que pode ser criada pelo secure-bucket-admin-user.
+# Lembre-se: Esse código poderia ser tanto realizado por voce para criação do código ou o seu kms-admin poderia executá-lo, após gerado a chave iremos utilizá-la na policy do bucket, que pode ser criada pelo secure-bucket-admin-user, se quiser use o .tf presente em kms-admin para gerar a chave antes de rodar o código.
 
 ### Passo 6: Criar um bucket
 
