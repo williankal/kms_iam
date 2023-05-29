@@ -74,7 +74,7 @@ No arquivo iam-policies.tf iremos criar as políticas que serão utilizadas para
 
 * Primeira política que criaremos será chamado: *bucket-admin* com a permissão de criar e gerenciar permissões em um s3 bucket
 
-```
+``` hcl
 data "aws_iam_policy_document" "bucket-admin" {
   statement {
     sid       = "AllowAllActions"
