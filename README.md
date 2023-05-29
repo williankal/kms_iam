@@ -113,7 +113,7 @@ O código acima criará a política para gerenciar o bucket chamado drive-cloud,
 
 * Segunda política será chamada de: *kms-admin* que poderá criar e gerenciar permissões de nossa chave KMS, responsável por criptografar os dados que serão colocados na nuvem
 
-```
+``` hcl
 data "aws_iam_policy_document" "kms-admin" {
   statement {
     sid       = "AllowAllKMS"
@@ -151,7 +151,7 @@ O código acima criará a política chamada kms-admin, que tem como função per
 
 * Terceira política será chamada de: *authorized-users* que poderá acessar um bucket específico e usar a chave KMS para criptografar os dados, entretanto sem poder de gerenciamento.
 
-```
+``` hcl
 resource "aws_iam_policy" "authorized-access" {
   name   = "secure-bucket-access"
   path   = "/"
@@ -199,7 +199,7 @@ Essa política será responsável por permitir que os usúarios IAM possam acess
 
 Um AWS IAM Role é uma identidade que você pode criar em sua conta da AWS que possui permissões específicas. Uma função do IAM é semelhante a um usuário do IAM, em que ambos são identidades com credenciais e permissões associadas que determinam quais operações eles podem e não podem realizar em outros recursos da AWS. Esse próximo passo será feito em outro arquivo para manter a organização, esse arquivo será chamado: iam-roles.tf
 
-```
+``` hcl
 resource "aws_iam_role" "authorized-access-role" {
   name = "authorized-access-role"
     assume_role_policy = jsonencode({
@@ -231,7 +231,7 @@ Essa função é para ser usada apenas por usúarios que estão operando dentro 
 
 Para o próximo passo vamos criar um arquivo chamado: iam-users.tf, nesse arquivo criaremos usúarios e adicionaremos as políticas criadas anteriormente.
 
-```
+``` hcl
 resource "aws_iam_user" "user_createKMSadmin" {
   name = "secure-key-admin"
   }
@@ -296,7 +296,7 @@ Esse arn será utilizado dentro da policy na criação de nosso s3 bucket.
 
 Outra possibilidade é criar a chave a partir do terraform utilizando o seguinte código:
 
-```
+``` hcl
 
 resource "aws_kms_key" "authorized-access" {
   description             = "KMS key for bucket access"
@@ -406,7 +406,7 @@ Utilizaremos o código abaixo para criar o bucket, esse bucket terá uma policy 
 
 ** IMPORTANTE: o passo abaixo só pode ser feito depois de ser criado a KMS KEY, já que em values deverá ser colocado o arn da kms**
 
-```
+``` hcl
 data "aws_iam_policy_document" "s3-policy-kms" {
   statement {
     sid       = "DenyUnencryptedObjectUploads"
@@ -455,7 +455,7 @@ Uma outra solução séria em vez de aplicar uma política de bucket, você pode
 
 Por fim, criaremos um ec2 profile utilizando a role que criamos anteriormente, para que o ec2 possa utilizar a chave kms.
 
-```
+``` hcl
 resource "aws_iam_instance_profile" "test_profile" {
   name = "test_profile"
   role = "authorized-access-role"
