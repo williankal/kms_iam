@@ -6,6 +6,8 @@ Separação de deveres é um dos principios em gerenciamento de segurança que p
 
 -----
 
+Link de inspiração: https://aws.amazon.com/pt/blogs/security/how-to-use-kms-and-iam-to-enable-independent-security-controls-for-encrypted-data-in-s3/
+
 ## Passos necessarios:
 
 *  Instalar terraforma e configurar sua aws
